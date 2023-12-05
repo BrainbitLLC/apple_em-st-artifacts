@@ -2,9 +2,10 @@
 #define EMHelpers_h
 
 #include "common_api.h"
-#include "EMMindData.h"
-#include "EMSpectralDataPercents.h"
-#include "EMRawSpectVals.h"
+#include <EMTypes.h>
+
+MathLibSetting libSettingsFromObjc(EMMathLibSetting*);
+ArtifactDetectSetting artifactSettingsFromObjc(EMArtifactDetectSetting*);
 
 EMMindData* mindDataFromNative(MindData& data);
 EMSpectralDataPercents* spectralPercentsFromNative(SpectralDataPercents& data);

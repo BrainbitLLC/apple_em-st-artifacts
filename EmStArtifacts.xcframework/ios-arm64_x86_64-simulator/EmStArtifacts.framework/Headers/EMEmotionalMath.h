@@ -4,22 +4,13 @@
 #include <Foundation/Foundation.h>
 #include <Foundation/NSArray.h>
 #include "common_api.h"
-#include "EMRawChannels.h"
-#include "EMMindData.h"
-#include "EMSpectralDataPercents.h"
-#include "EMRawSpectVals.h"
-
-typedef NS_ENUM(UInt8, EMSideType) {
-    Left,
-    Right,
-    None
-};
+#include "EMTypes.h"
 
 @interface EMEmotionalMath : NSObject{
     MathLib* mathPtr;
 }
 
--(id) initWithLibSettings: (MathLibSetting) settings andArtifactDetetectSettings: (ArtifactDetectSetting) artifactSettings andShortArtifactDetectSettigns:(ShortArtifactDetectSetting) shortArtifactSettings andMentalAndSpectralSettings: (MentalAndSpectralSetting) mentalAndSpectral;
+-(id) initWithLibSettings: (EMMathLibSetting*) settings andArtifactDetetectSettings: (EMArtifactDetectSetting*) artifactSettings andShortArtifactDetectSettigns:(ShortArtifactDetectSetting) shortArtifactSettings andMentalAndSpectralSettings: (MentalAndSpectralSetting) mentalAndSpectral;
 -(void) setMentalEstimationMode:(bool) independent;
 -(void) setHanningWinSpect;
 -(void) setHammingWinSpect;
@@ -37,44 +28,29 @@ typedef NS_ENUM(UInt8, EMSideType) {
 
 -(void) setPrioritySide: (EMSideType) side;
 -(void) startCalibration;
--(bool) calibrationFinished;
+-(BOOL) calibrationFinished;
  
 
--(bool) isArtifactedWinOnSide:(EMSideType) side andIsPrintInfo:(bool) print_info;
--(bool) isArtifactedSequence;
--(bool) isBothSidesArtifacted;
+-(BOOL) isArtifactedWinOnSide:(EMSideType) side andIsPrintInfo:(bool) print_info;
+-(BOOL) isArtifactedSequence;
+-(BOOL) isBothSidesArtifacted;
 
--(int) readMentalDataArrSize;
 -(NSArray<EMMindData*>*) readMentalDataArr;
 
 -(EMMindData*) readAverageMentalData:(int) n_lastwins_toaverage;
-
-
--(int) readSpectralDataPercentsArrSize;
 
 -(NSArray<EMSpectralDataPercents*>*) MathLibReadSpectralDataPercentsArr;
 
 -(EMRawSpectVals*) readRawSpectralVals;
 
--(void) setZeroSpectWavesWithActive:(bool) active andDelta:(int) delta andTheta:(int) theta andAlpha:(int) alpha andBeta:(int) beta andGamma:(int) gamma;
+-(void) setZeroSpectWavesWithActive:(BOOL) active andDelta:(UInt32) delta andTheta:(UInt32) theta andAlpha:(UInt32) alpha andBeta:(UInt32) beta andGamma:(UInt32) gamma;
 
 -(void) setWeightsForSpectraWithDelta:(double) delta_c andTheta:(double) theta_c andAlpha:(double) alpha_c andBeta:(double) beta_c andGamma:(double) gamma_c;
--(void) setSpectNormalizationByBandsWidth:(bool) fl;
--(void) setSpectNormalizationByCoeffs:(bool) fl;
+-(void) setSpectNormalizationByBandsWidth:(BOOL) fl;
+-(void) setSpectNormalizationByCoeffs:(BOOL) fl;
 
--(int) getCallibrationPercents;
+-(UInt32) getCallibrationPercents;
 
-/*
-#ifdef _DEBUG
-
-void MathLibCheckArtifactsOnLeftChannel(MathLib* mathLibPtr, int* type, double* location, bool* start, OpStatus* opResult);
-void MathLibCheckArtifactsOnRightChannel(MathLib* mathLibPtr, int* type, double* location, bool* start, OpStatus* opResult);
-
-double MathLibReadLeftChannel(MathLib* mathLibPtr, OpStatus* opResult);
-double MathLibReadRightChannel(MathLib* mathLibPtr, OpStatus* opResult);
-
-#endif
-*/
  @end
 
 #endif /* EMEmotionalMath_h */
