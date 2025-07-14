@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "em-st-artifacts"
-  spec.version      = "1.0.4"
+  spec.version      = "1.0.5"
   spec.summary      = "Math Library for determining emotional state."
   spec.homepage     = "https://gitlab.com/neurosdk2/neurosamples"
   spec.license      = { :type => 'MIT' } 
